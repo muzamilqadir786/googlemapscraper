@@ -1,0 +1,172 @@
+# -*- coding: utf-8 -*-
+import scrapy
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+import time
+from scrapy.selector import Selector
+from scrapy.http import Request
+import lxml.html
+from googleproperty.items import GooglepropertyItem
+import xlrd
+#driver = webdriver.Chrome('c://chromedriver.exe')
+
+import sys
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
+import random
+
+class PropertyspiderSpider(scrapy.Spider):
+    name = "propertyspider"
+    allowed_domains = ["google.com/spider"]
+    start_urls = (
+        'https://www.google.com/maps/',
+    )
+
+    def __init__(self):
+        self.cities = self.read_xls()
+        self.driver = None
+        self.setting_options()
+        
+        
+
+    def setting_options(self):
+        try:        
+            options = webdriver.ChromeOptions()
+            #options.add_extension("c://block.crx")
+            # options.add_extension("c://browsec.crx") #To use proxy extension to avoid blocking.
+            options.add_argument("--disable-javascript")
+            options.add_argument("--disable-java")
+            options.add_argument("--disable-plugins")
+            options.add_argument("--disable-popup-blocking")        
+            options.add_argument("--disable-images")      
+            self.driver = webdriver.Chrome('c://chromedriver.exe',chrome_options = options) 
+        except Exception as e:
+            #driver.refresh()
+            print e  
+
+    def read_xls(self,file='cities-keywords-targets.xlsx'):
+        # Open the workbook
+        xl_workbook = xlrd.open_workbook(file)
+        # List sheet names, and pull a sheet by name
+        sheet_names = xl_workbook.sheet_names()
+        print('Sheet Names', sheet_names)
+        
+        xl_sheet = xl_workbook.sheet_by_name(sheet_names[0])
+        num_cols = xl_sheet.ncols   # Number of columns
+
+        row = xl_sheet.row(0)  # 1st row
+
+        # Print 1st row values and types
+        from xlrd.sheet import ctype_text   
+
+        print('(Column #) type:value')
+        for idx, cell_obj in enumerate(row):
+            cell_type_str = ctype_text.get(cell_obj.ctype, 'unknown type')
+            print('(%s) %s %s' % (idx, cell_type_str, cell_obj.value))
+
+        num_cols = xl_sheet.ncols   # Number of columns
+        urls = []
+        for row_idx in range(1, xl_sheet.nrows):    # Iterate through rows
+            print ('-'*40)
+            print ('Row: %s' % row_idx)   # Print row number
+            cell_obj = xl_sheet.cell(row_idx, 2)  # Get cell object by row, col
+            print cell_obj.value.encode("utf8")
+            urls.append(cell_obj.value)
+        return filter(None,urls)
+
+   
+    def parse(self, response):
+        pause = 15
+    	print response.url
+        print self.cities
+        cities = self.cities
+
+        driver = self.driver
+        print dir(driver)
+    	driver.get(response.url)        
+		#city = ''
+        for x in range(10):
+            rn = random.randint(1,267)
+            print cities[rn]
+            city = cities[rn]
+
+            search_elem = driver.find_element_by_name("q")
+            search_elem.clear()
+            search_elem.send_keys('property management {0}'.format(city)) #search term putted into the search field.
+            # search_elem.send_keys(Keys.RETURN)
+            time.sleep(pause)             
+            search_btn_elem = driver.find_elements_by_class_name('searchbutton')
+            search_btn_elem[0].click()
+            time.sleep(5) 
+            print "here after click"
+            for x in range(1,15):    
+                html = driver.page_source
+                hxs = lxml.html.fromstring(html)
+                properties = hxs.xpath('//h3[@class="cards-categorical-list-item-info"]')
+                properties_xpath = driver.find_elements_by_xpath('//h3[@class="cards-categorical-list-item-info"]')
+                print properties
+                item = GooglepropertyItem()
+                for propertyd in properties_xpath:
+                    print propertyd
+                    try:
+                        propertyd.click()
+                        time.sleep(2)
+                        url_and_phone_html = driver.page_source
+                        url_and_phone_hxs = lxml.html.fromstring(url_and_phone_html)
+                        url = url_and_phone_hxs.xpath('//div[@class="cards-entity-url"]/a/span/text()')
+                        phone = url_and_phone_hxs.xpath('//div[@class="cards-entity-phone"]/span/text()')
+                        print url
+                        print phone
+                        item["URL"] = url
+                        item["Phone"]
+                    except Exception as e:
+                        print e
+
+                    try:
+                        time.sleep(1)
+                        list_all_records = driver.find_element_by_xpath('//div[@class="cards-categorical-list-context-card"]/a')
+                        if list_all_records:
+                            list_all_records.click()                            
+                    except Exception as e:
+                        print e
+                        continue
+
+                yield item
+
+            #         title = propertyd.xpath('./div[@class="cards-categorical-list-item-title cards-strong"]/span/text()')
+            #         print title 
+            #         rating_score = propertyd.xpath('.//span[@class="cards-rating-score"]/text()') 
+            #         number_of_ratings = propertyd.xpath('.//div[@class="cards-categorical-list-item-num-ratings"]/span/text()')
+            #         address = propertyd.xpath('./div[@class="cards-categorical-list-item-address"]/span/text()')  
+            #         print address
+            #         if address:
+            #             address = address[0].split(',') 
+            #             state = address[-1]
+            #             zipcode = address[-2]
+            #             property_city = address[-3]
+            #             saddress = ','.join(address[:2])
+                    
+            #         item['CompanyName'] = title
+            #         item['Address'] = saddress
+            #         item['City'] = property_city
+            #         item['Zipcode'] = zipcode
+            #         item['State'] = state
+            #         item['NoOfReviews'] = number_of_ratings
+            #         item['AverageReview'] = rating_score
+
+            #         yield item
+            #     try:
+            #         elem = driver.find_elements_by_xpath('//span[@class="cards-categorical-pagination-button-right"]/..')
+            #         if elem:
+            #             elem[0].click()
+            #     except Exception as e:
+            #         print e
+            #         break
+            #     # else:
+            #     #     print "here in else with break"
+            #     #     break
+                    
+            #     time.sleep(5)    
+            # # driver.quit()
+                

@@ -1,0 +1,164 @@
+{
+    "1602monm150633.zip": {
+        "PASSAIC": "Clifton"
+    },
+    "1603monm150655.zip": {
+        "PASSAIC": "Haledon"
+    },
+    "1605monm150715.zip": {
+        "PASSAIC": "Little Falls"
+    },
+    "1604monm150734.zip": {
+        "PASSAIC": "Hawthorne"
+    },
+    "1611monm150753.zip": {
+        "PASSAIC": "Ringwood"
+    },
+    "1612monm150812.zip": {
+        "PASSAIC": "Totowa"
+    },
+    "1613monm150831.zip": {
+        "PASSAIC": "Wanaque"
+    },
+    "1614monm150850.zip": {
+        "PASSAIC": "Wayne"
+    },
+    "2005monm150914.zip": {
+        "UNION": "Fanwood"
+    },
+    "2006monm150932.zip": {
+        "UNION": "Garwood"
+    },
+    "2008monm150951.zip": {
+        "UNION": "Kenilworth"
+    },
+    "2010monm151010.zip": {
+        "UNION": "Mountainside"
+    },
+    "2018monm151029.zip": {
+        "UNION": "Summit"
+    },
+    "2020monm151048.zip": {
+        "UNION": "Westfield"
+    },
+    "2001monm151107.zip": {
+        "UNION": "Berkeley Heights"
+    },
+    "2002monm151126.zip": {
+        "UNION": "Clark"
+    },
+    "2003monm151145.zip": {
+        "UNION": "Cranford"
+    },
+    "2016monm151205.zip": {
+        "UNION": "Scotch Plains"
+    },
+    "2017monm151224.zip": {
+        "UNION": "Springfield"
+    },
+    "2019monm151247.zip": {
+        "UNION": "Union"
+    },
+    "0702monm151310.zip": {
+        "ESSEX": "Bloomfield"
+    },
+    "0704monm151330.zip": {
+        "ESSEX": "Cedar Grove"
+    },
+    "0706monm151352.zip": {
+        "ESSEX": "Essex Fells"
+    },
+    "0708monm151410.zip": {
+        "ESSEX": "Glen Ridge"
+    },
+    "0710monm151429.zip": {
+        "ESSEX": "Livingston"
+    },
+    "0711monm151450.zip": {
+        "ESSEX": "Maplewood"
+    },
+    "0713monm151510.zip": {
+        "ESSEX": "Montclair"
+    },
+    "0715monm151529.zip": {
+        "ESSEX": "North Caldwell"
+    },
+    "0716monm151548.zip": {
+        "ESSEX": "Nutley"
+    },
+    "0718monm151608.zip": {
+        "ESSEX": "Roseland"
+    },
+    "0719monm151627.zip": {
+        "ESSEX": "South Orange"
+    },
+    "0720monm151646.zip": {
+        "ESSEX": "Verona"
+    },
+    "0721monm151705.zip": {
+        "ESSEX": "West Caldwell"
+    },
+    "1403monm151726.zip": {
+        "MORRIS": "Butler"
+    },
+    "1408monm151745.zip": {
+        "MORRIS": "Denville"
+    },
+    "1409monm151805.zip": {
+        "MORRIS": "Dover"
+    },
+    "1410monm151824.zip": {
+        "MORRIS": "East Hanover"
+    },
+    "1411monm151843.zip": {
+        "MORRIS": "Florham Park"
+    },
+    "1412monm151904.zip": {
+        "MORRIS": "Hanover"
+    },
+    "1413monm151923.zip": {
+        "MORRIS": "Harding"
+    },
+    "1415monm151942.zip": {
+        "MORRIS": "Kinnelon"
+    },
+    "1417monm152000.zip": {
+        "MORRIS": "Madison"
+    },
+    "1424monm152021.zip": {
+        "MORRIS": "Morristown"
+    },
+    "1422monm152041.zip": {
+        "MORRIS": "Morris Township"
+    },
+    "1423monm152100.zip": {
+        "MORRIS": "Morris Plains"
+    },
+    "1429monm152120.zip": {
+        "MORRIS": "Parsippany"
+    },
+    "1801monm152142.zip": {
+        "SOMERSET": "Bedminster"
+    },
+    "1803monm152200.zip": {
+        "SOMERSET": "Bernardsville"
+    },
+    "1804monm152220.zip": {
+        "SOMERSET": "Bound Brook"
+    },
+    "1805monm152238.zip": {
+        "SOMERSET": "Branchburg"
+    },
+    "1806monm152257.zip": {
+        "SOMERSET": "Bridgewater"
+    },
+    "1808monm152318.zip": {
+        "SOMERSET": "Franklin"
+    },
+    "1820monm152340.zip": {
+        "SOMERSET": "Warren"
+    },
+    "1821monm152359.zip": {
+        "SOMERSET": "Watchung"
+    }
+}
