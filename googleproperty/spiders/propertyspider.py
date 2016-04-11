@@ -172,6 +172,7 @@ class Propertyspider(scrapy.Spider):
                                     time.sleep(3)
                             except Exception as e:
                                 break
+                                
                                 print e.message
                                 
 
