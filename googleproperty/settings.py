@@ -26,6 +26,8 @@ DOWNLOAD_DELAY = 0.25    # 250 ms of delay
 COOKIES_ENABLED = False
 
 
-
+#LOG_LEVEL = 'WARNING'
+#LOG_FILE = 'scrapy.log'
+#LOG_STDOUT = False
 
 
